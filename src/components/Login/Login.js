@@ -36,7 +36,7 @@ export class Login extends Component {
             console.log(loginData.userName,loginData.password);
             localStorage.setItem("userId",response.data.userId);
             // this.props.history.push('/listOfStocks');
-            window.location.replace('http://localhost:3000/#/ListOfStocks')
+            window.location.replace('http://13.233.140.121:8888/build/#/listOfStocks')
             console.log(response);
         }).catch((error)=>{
             console.log(error);
