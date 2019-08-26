@@ -71,11 +71,14 @@ class Header extends Component {
           )}
 
           <span>
-          <select onChange="window.location.redirect(this.value)">
-    <option value="..">back</option>
-    <option value="./listOfStocks">list</option>
-    <option value="/dashBoard">bottom</option>
-    </select>
+            <Link
+              to="/trendingStock"
+              data-toggle="tooltip"
+              title="Register"
+              className="link2"
+            >
+              dashboard
+            </Link>
           </span>
 
           <span>

@@ -17,6 +17,10 @@ import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import ListOfStocks from './components/ListOfStocks/ListOfStocks';
 import BuyStock from './components/BuyStock/BuyStock';
+import ListOfOrders from './components/ListOfOrders/ListOfOrders';
+import TrendingStock from './components/TrendingStock/TrendingStock';
+import TrendingStockss from './components/TrendingStock/TrendingStockss'
+
 
 
 
@@ -82,6 +86,11 @@ class App extends Component {
 
           <Route path='/login' component={()=><Login validateUser={this.validateUser}/>}></Route>
           <Route path="/buyStock" component={BuyStock}/>
+          <Route path="/listOfOrders" component={ListOfOrders}/>
+          <Route path="/trendingStock" component={TrendingStock}/>
+          <Route path="/trendingstockss" component={TrendingStockss}/>
+
+        
 
           </Switch>
 

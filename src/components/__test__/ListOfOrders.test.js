@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow,mount} from 'enzyme';
-import ListOfStocks from '../components/ListOfStocks/ListOfStocks';
+import ListOfOrders from '../components/ListOfOrders/ListOfOrders';
 
 describe('When Controlled component is given', () => {
     let wrapper;
         beforeEach(() => {
-            wrapper = mount(<ListOfStocks/>);
+            wrapper = mount(<ListOfOrders/>);
   });
 
     it('should render', () => {
@@ -25,16 +25,16 @@ describe('When Controlled component is given', () => {
    
       describe('When first button is cliked', () => {
         it('should have called cancel function', () => {
-          const comp = shallow(<ListOfStocks/>);
-          const spy = jest.spyOn(comp.instance(), 'handleBuy');
+          const comp = shallow(<ListOfOrders/>);
+          const spy = jest.spyOn(comp.instance(), 'handleListOfStock');
           comp.instance().forceUpdate();
-          comp.find('#btn3').simulate('click');
+          comp.find('#btn6').simulate('click');
           expect(spy).toHaveBeenCalled();
         });
       });
     
       describe('when account summary is ',()=>{
-        const listOfStock=[
+        const listOfOrders=[
           {
             stockName:"d",
             stockexchangeName:"moongdal",
@@ -55,7 +55,7 @@ describe('When Controlled component is given', () => {
           }
         ]
         beforeEach(()=>{
-          wrapper=shallow(<ListOfStocks listOfStock={listOfStock} />)
+          wrapper=shallow(<ListOfOrder listOfOrders={listOfOrders} />)
         });
         it('should renderlist of accounts for a user',()=>{
           const table=wrapper.find('table');

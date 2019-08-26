@@ -31,7 +31,7 @@ export class Login extends Component {
         e.preventDefault();
         const { loginData } = this.state;
         this.props.validateUser(true);     
-        axios.post('http://10.117.189.174:9090/trading/api/login',loginData).then((response)=>{
+        axios.post('http://10.117.189.127:9090/trading/api/login',loginData).then((response)=>{
             console.log("login successfull");
             console.log(loginData.userName,loginData.password);
             localStorage.setItem("userId",response.data.userId);

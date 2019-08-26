@@ -1,22 +1,19 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 
-class ListOfStocks extends Component{
+class ListOfOrders extends Component{
     constructor(props){
         super(props);
         this.state={
-            listOfStock:[],
-            buy:{
-                stockQuantity:'',
-
-            }
+            stock:[]
+          
         }
     }
     componentDidMount() {
      
         this.getData().then(response => {
             console.log(response.data)
-          this.setState({ listOfStock: response.data });
+          this.setState({ stock: response.data });
         });
     
     
@@ -25,7 +22,8 @@ class ListOfStocks extends Component{
        
        
         return new Promise((resolve, reject) => {
-          axios.get('http://10.117.189.127:9090/trading/api/getAllStocks').then((response)=> {
+            var userId=localStorage.getItem("userId");
+          axios.get('http://10.117.189.127:9090/trading/api/orders/'+userId).then((response)=> {
             resolve(response);
           console.log(response);
           }).catch((error)=> {
@@ -33,21 +31,18 @@ class ListOfStocks extends Component{
           });
         });
       }
-    handleBuy=(item)=>{
-        localStorage.setItem("stockId",item.stockId);
-        this.props.history.push('/buyStock');
+      handleListOfStock=()=>{
 
-    }
+        this.props.history.push('/listOfStocks');
+      }
+    
 
-trendingStock=()=>{
-  this.props.histroy.push('/trendingStock');
-}
           render(){
           return(
             <div>
-              <button className="btn btn-outline-primary" onClick={this.trendingStock}>trendingStock</button>
+              <button className="btn btn-outline-primary" onClick={this.handleListOfStock}>List of stocks</button>
            <div>
-            <h5>List of stocks</h5>
+            <h5>Cancelled or executed List of stocks</h5>
             
             <table class="table">
                 <thead>
@@ -57,8 +52,9 @@ trendingStock=()=>{
                         <th scope="col">STOCK EXCHANGE NAME</th>
                         <th scope="col">QUANTITY</th>
                         <th scope="col">PRICE</th>
-                        <th scope="col">BROKERAGE PERCENTAGE</th>
-                        <th scope="col">ACTION</th>
+                        <th scope="col">CREATION DATE</th>
+                        <th scope="col">SETTLEMENT DATE</th>
+                        <th scope="col">STATUS</th>
 
                        
     
@@ -66,18 +62,18 @@ trendingStock=()=>{
                 </thead>
                     <tbody>
     
-                        {this.state.listOfStock.map((item,i)=>{
+                        {this.state.stock.map((item,i)=>{
                             return(
                                 <tr key={i}>
                                  
                                     <td>{item.stockName}</td>
                                     <td>{item.stockExchangeName}</td>
-                                    <td>{item.availableQuantity}</td>
-                                    <td>{item.stockPrice}</td>
-                                    <td>{item.brokerageAmount}%</td>
-                                    <td>
-                                        <button id="btn3" className="btn btn-outline-primary" onClick={()=>this.handleBuy(item)}  data-target="#myModal" >BUY</button>
-                                    </td>
+                                    <td>{item.stockQuantity}</td>
+                                    <td>{item.totalPrice}</td>
+                                    <td>{item.creationDate}</td>
+                                    <td>{item.settlementDate}</td>
+                                    <td>{item.stockStatus}</td>
+                                
                                     </tr>
                              )
     
@@ -94,4 +90,4 @@ trendingStock=()=>{
           )
       }
 }
-export default ListOfStocks;
+export default ListOfOrders;
